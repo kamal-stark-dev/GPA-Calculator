@@ -64,7 +64,18 @@ function addCourseInput() {
   courseInputs.appendChild(courseRow);
 }
 
+function removeCourseInput() {
+  const rows = courseInputs.getElementsByClassName("course-row");
+  if (rows.length > 0) {
+    // remove the last row
+    courseInputs.removeChild(rows[rows.length - 1]);
+  }
+}
+
 document.getElementById("addCourse").addEventListener("click", addCourseInput);
+document
+  .getElementById("removeCourse")
+  .addEventListener("click", removeCourseInput);
 
 document.getElementById("gpaForm").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -89,7 +100,7 @@ document.getElementById("gpaForm").addEventListener("submit", function (e) {
   const gpa = calculateGPA(subjects, credits, grades);
 
   if (!isNaN(gpa)) {
-    outputDiv.textContent = `YOUR GPA IS: ${gpa}`;
+    outputDiv.textContent = `YOUR GPA IS - ${gpa}`;
   } else {
     outputDiv.textContent = `Error: Please ensure all fields are filled correctly.`;
   }

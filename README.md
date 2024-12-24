@@ -2,6 +2,8 @@
 
 This project is a simple web-based GPA Calculator that allows users to input their course information, credits, and grades to calculate their GPA. It uses **HTML**, **CSS**, and **JavaScript** for the frontend and logic.
 
+![](./demo.png)
+
 ## Features
 
 1. Dynamic input fields for multiple courses.
