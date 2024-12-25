@@ -134,75 +134,38 @@ pasteButton.addEventListener("click", async () => {
 
 // scrape out the credits and grades from the text
 function scrapeAndReturnGPA(text) {
-  // Split into lines and clean up the text
-  let lines = text.trim().split("\n");
-
-  let values = [];
-  let credits = [];
-  let grades = [];
-
-  // Process each line
-  for (let line of lines) {
-    // Find the last number in the line (credit)
-    let creditMatch = ""; // store the credit value
-    let gradeMatch = ""; // store the grade value
-    let hasPlus = false; // true if the grade has "+" symbol
-
-    // Go through the line from right to left
-    for (let i = line.length - 1; i >= 0; i--) {
-      // Check for grade and plus
-      if (!gradeMatch) {
-        if (line[i] === "+") {
-          hasPlus = true;
-          continue;
-        }
-        if (/[A-F]/.test(line[i])) {
-          gradeMatch = line[i] + (hasPlus ? "+" : "");
-          continue;
-        }
-      }
-
-      // If we haven't found the credit yet
-      if (!creditMatch && /[\d.]/.test(line[i])) {
-        creditMatch = line[i] + creditMatch;
-        // Look for more digits
-        while (i > 0 && /[\d.]/.test(line[i - 1])) {
-          i--;
-          creditMatch = line[i] + creditMatch;
-        }
-      }
-
-      if (creditMatch && gradeMatch) break;
-    }
-
-    if (creditMatch && gradeMatch) {
-      const credit = parseFloat(creditMatch);
-      if (!isNaN(credit) && credit > 0) {
-        credits.push(credit);
-        grades.push(gradeMatch);
-      }
-    }
-  }
-
-  // console.log("Credits:", credits); // ex: [4, 1, 1, 4, 2, 1, 4, 3, 1, 1, 2]
-  // console.log("Grades:", grades); // ex: ['B', 'B', 'C+', 'B+', 'B+', 'C+', 'B', 'B', 'A', 'B+', 'B+']
+  // Split text into lines and remove the header
+  const lines = text.trim().split("\n").slice(1); // Skip header row
 
   let totalCredits = 0;
   let totalPoints = 0;
 
-  for (let i = 0; i < credits.length; i++) {
-    const grade = grades[i];
-    const credit = credits[i];
+  for (let line of lines) {
+    // Split the line using tab characters
+    const parts = line.split("\t").map((part) => part.trim()); // Trim each part
 
-    if (gradeMap.hasOwnProperty(grade)) {
-      totalCredits += credit;
-      totalPoints += credit * gradeMap[grade];
+    if (parts.length === 4) {
+      const credit = parseFloat(parts[2]); // Credits are in the 3rd column
+      const grade = parts[3]; // Grade is in the 4th column
+
+      // Skip grades marked as "Qualified"
+      if (grade === "Qualified") continue;
+
+      // Check if the grade is valid
+      if (gradeMap.hasOwnProperty(grade)) {
+        totalCredits += credit;
+        totalPoints += credit * gradeMap[grade];
+      } else {
+        console.error(`Invalid grade: "${grade}"`);
+        return NaN;
+      }
     } else {
-      console.error(`Invalid grade: ${grade}`);
+      console.error(`Invalid line format: "${line}"`);
       return NaN;
     }
   }
 
+  // Calculate and return GPA
   return totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : NaN;
 }
 
