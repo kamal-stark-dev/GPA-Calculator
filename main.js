@@ -116,7 +116,7 @@ document.getElementById("gpaForm").addEventListener("submit", function (e) {
   displayGPA(gpa);
 });
 
-// Report paste feature
+// paste feature functionality
 const pasteButton = document.querySelector("#pasteBtn");
 const outputArea = document.querySelector("#pasteArea");
 
@@ -125,14 +125,86 @@ pasteButton.addEventListener("click", async () => {
     // Request permission to read from the clipboard
     const text = await navigator.clipboard.readText();
     outputArea.value = text;
-    scrapeGPA(text);
+    const gpa = scrapeAndReturnGPA(text);
     displayGPA(gpa);
   } catch (err) {
     console.error("Failed to read clipboard contents: ", err);
   }
 });
 
-function scrapeGPA(text) {}
+// scrape out the credits and grades from the text
+function scrapeAndReturnGPA(text) {
+  // Split into lines and clean up the text
+  let lines = text.trim().split("\n");
+
+  let values = [];
+  let credits = [];
+  let grades = [];
+
+  // Process each line
+  for (let line of lines) {
+    // Find the last number in the line (credit)
+    let creditMatch = ""; // store the credit value
+    let gradeMatch = ""; // store the grade value
+    let hasPlus = false; // true if the grade has "+" symbol
+
+    // Go through the line from right to left
+    for (let i = line.length - 1; i >= 0; i--) {
+      // Check for grade and plus
+      if (!gradeMatch) {
+        if (line[i] === "+") {
+          hasPlus = true;
+          continue;
+        }
+        if (/[A-F]/.test(line[i])) {
+          gradeMatch = line[i] + (hasPlus ? "+" : "");
+          continue;
+        }
+      }
+
+      // If we haven't found the credit yet
+      if (!creditMatch && /[\d.]/.test(line[i])) {
+        creditMatch = line[i] + creditMatch;
+        // Look for more digits
+        while (i > 0 && /[\d.]/.test(line[i - 1])) {
+          i--;
+          creditMatch = line[i] + creditMatch;
+        }
+      }
+
+      if (creditMatch && gradeMatch) break;
+    }
+
+    if (creditMatch && gradeMatch) {
+      const credit = parseFloat(creditMatch);
+      if (!isNaN(credit) && credit > 0) {
+        credits.push(credit);
+        grades.push(gradeMatch);
+      }
+    }
+  }
+
+  // console.log("Credits:", credits); // ex: [4, 1, 1, 4, 2, 1, 4, 3, 1, 1, 2]
+  // console.log("Grades:", grades); // ex: ['B', 'B', 'C+', 'B+', 'B+', 'C+', 'B', 'B', 'A', 'B+', 'B+']
+
+  let totalCredits = 0;
+  let totalPoints = 0;
+
+  for (let i = 0; i < credits.length; i++) {
+    const grade = grades[i];
+    const credit = credits[i];
+
+    if (gradeMap.hasOwnProperty(grade)) {
+      totalCredits += credit;
+      totalPoints += credit * gradeMap[grade];
+    } else {
+      console.error(`Invalid grade: ${grade}`);
+      return NaN;
+    }
+  }
+
+  return totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : NaN;
+}
 
 // Add the first course input fields on load
 addCourseInput();
