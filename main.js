@@ -107,5 +107,18 @@ document.getElementById("gpaForm").addEventListener("submit", function (e) {
   outputDiv.style.display = "block";
 });
 
+const pasteButton = document.querySelector("#pasteBtn");
+const outputArea = document.querySelector("#pasteArea");
+
+pasteButton.addEventListener("click", async () => {
+  try {
+    // Request permission to read from the clipboard
+    const text = await navigator.clipboard.readText();
+    outputArea.value = text;
+  } catch (err) {
+    console.error("Failed to read clipboard contents: ", err);
+  }
+});
+
 // Add the first course input fields on load
 addCourseInput();
