@@ -69,6 +69,22 @@
     </main>
 
     <footer></footer>
+    <div id="snowflakes"></div>
+
+    <script>
+      const snowflakesCount = 100; // Number of snowflakes
+      const snowflakesContainer = document.getElementById("snowflakes");
+
+      for (let i = 0; i < snowflakesCount; i++) {
+        const snowflake = document.createElement("div");
+        snowflake.className = "snowflake";
+        snowflake.innerHTML = "❄"; // Snowflake character
+        snowflake.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random fall speed
+        snowflake.style.fontSize = Math.random() * 1 + 0.5 + "em"; // Random size
+        snowflakesContainer.appendChild(snowflake);
+      }
+    </script>
 
     <script src="./main.js"></script>
   </body>
