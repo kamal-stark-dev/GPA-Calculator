@@ -12,6 +12,18 @@ text = `
 22UCT-103	Universal Human Values, Ethics and Life Skills-1	2.00	B+
 `;
 
+const gradeMap = {
+  "A+": 10,
+  A: 9,
+  "B+": 8,
+  B: 7,
+  "C+": 6,
+  C: 5,
+  D: 4,
+  E: 3,
+  F: 0,
+};
+
 lines = text.trim().split("\n");
 
 if (lines[0].toLowerCase().includes("subject code")) {
@@ -36,3 +48,24 @@ for (let value of values) {
 console.log(lines);
 console.log("Credits:", credits);
 console.log("Grades:", grades);
+
+let totalCredits = 0;
+let totalPoints = 0;
+
+for (let i = 0; i < credits.length; i++) {
+  const grade = grades[i];
+  const credit = credits[i];
+
+  if (gradeMap.hasOwnProperty(grade)) {
+    totalCredits += credit;
+    totalPoints += credit * gradeMap[grade];
+  } else {
+    console.error(`Invalid grade: ${grade}`);
+    print(NaN);
+  }
+}
+
+console.log(
+  "Your GPA is: ",
+  totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : NaN
+);

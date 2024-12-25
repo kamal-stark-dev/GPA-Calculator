@@ -33,7 +33,7 @@ function calculateGPA(credits, grades) {
 // displays the GPA if exists
 function displayGPA(gpa) {
   if (!isNaN(gpa)) {
-    outputDiv.textContent = `YOUR GPA IS - ${gpa}`;
+    outputDiv.textContent = `YOUR GPA IS : ${gpa}`;
   } else {
     outputDiv.textContent = `Error: Please ensure all fields are filled correctly.`;
   }
