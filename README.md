@@ -53,4 +53,4 @@ You can modify the following aspects to suit your needs:
 
 ## License
 
-This project is open-source and free to use under the MIT License. Build by [Kamalveer Singh](https://www.github.com/kamal-stark-dev)
+This project is open-source and free to use under the MIT License. Built by [Kamalveer Singh](https://x.com/kamal_stark_)
