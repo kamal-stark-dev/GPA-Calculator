@@ -22,6 +22,11 @@ header nav {
   margin-right: 2rem;
 }
 
+#main-logo {
+  width: 480px;
+  margin: 0.2rem 3rem 1rem;
+}
+
 nav ul {
   display: flex;
   list-style: none;
