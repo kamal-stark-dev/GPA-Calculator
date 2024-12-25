@@ -69,9 +69,18 @@
     </main>
 
     <footer></footer>
+    <!-- Christmas Stuff -->
     <div id="snowflakes"></div>
 
+    <audio id="backgroundMusic" loop>
+      <source src="./last-christmas.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <button id="playPauseButton"><i class="ri-volume-up-line"></i></button>
+
     <script>
+      // snow flakes
       const snowflakesCount = 100; // Number of snowflakes
       const snowflakesContainer = document.getElementById("snowflakes");
 
@@ -84,6 +93,23 @@
         snowflake.style.fontSize = Math.random() * 1 + 0.5 + "em"; // Random size
         snowflakesContainer.appendChild(snowflake);
       }
+
+      // music
+      const audio = document.getElementById("backgroundMusic");
+      const playPauseButton = document.getElementById("playPauseButton");
+
+      // Start playing the music automatically
+      audio.play();
+
+      playPauseButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play(); // Play the audio
+          playPauseButton.innerHTML = `<i class="ri-volume-up-line"></i>`; // Update button text
+        } else {
+          audio.pause(); // Pause the audio
+          playPauseButton.innerHTML = `<i class="ri-volume-mute-line"></i>`; // Update button text
+        }
+      });
     </script>
 
     <script src="./main.js"></script>

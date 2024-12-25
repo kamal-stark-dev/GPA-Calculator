@@ -31,7 +31,7 @@ nav ul {
 nav ul li a {
   text-decoration: none;
   color: black;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   transition: 0.3s ease-in-out;
 }
 
@@ -149,6 +149,9 @@ button:hover {
 body {
   background-color: #282c34; /* Dark background for better contrast */
 }
+nav ul li a {
+  color: #111;
+}
 nav ul li a:hover {
   color: #fff;
 }
@@ -180,4 +183,22 @@ nav ul li a:hover {
   100% {
     transform: translateY(100vh);
   }
+}
+
+/* Music */
+
+#playPauseButton {
+  width: max-content;
+  position: absolute;
+  right: 2rem;
+  bottom: 1.2rem;
+  font-size: 2rem;
+  background-color: #222;
+  padding: 1.1rem;
+  transition: 0.2s ease-in-out;
+  border-radius: 1rem;
+}
+
+#playPauseButton:hover {
+  background-color: #111;
 }
