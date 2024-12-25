@@ -135,7 +135,11 @@ pasteButton.addEventListener("click", async () => {
 // scrape out the credits and grades from the text
 function scrapeAndReturnGPA(text) {
   // Split text into lines and remove the header
-  const lines = text.trim().split("\n").slice(1); // Skip header row
+  const lines = text.trim().split("\n");
+
+  if (lines[0].toLowerCase().includes("subject code")) {
+    lines.shift();
+  }
 
   let totalCredits = 0;
   let totalPoints = 0;
