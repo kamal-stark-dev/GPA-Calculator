@@ -13,11 +13,12 @@ const gradeMap = {
   F: 0,
 };
 
-function calculateGPA(subjects, credits, grades) {
+// calculate the GPA from credits and grades
+function calculateGPA(credits, grades) {
   let totalCredits = 0;
   let studentPoints = 0;
 
-  for (let i = 0; i < subjects.length; i++) {
+  for (let i = 0; i < credits.length; i++) {
     if (credits[i] > 0 && gradeMap.hasOwnProperty(grades[i])) {
       totalCredits += credits[i];
       studentPoints += credits[i] * gradeMap[grades[i]];
@@ -29,6 +30,17 @@ function calculateGPA(subjects, credits, grades) {
   return totalCredits > 0 ? (studentPoints / totalCredits).toFixed(2) : NaN;
 }
 
+// displays the GPA if exists
+function displayGPA(gpa) {
+  if (!isNaN(gpa)) {
+    outputDiv.textContent = `YOUR GPA IS - ${gpa}`;
+  } else {
+    outputDiv.textContent = `Error: Please ensure all fields are filled correctly.`;
+  }
+  outputDiv.style.display = "block";
+}
+
+// add course input fields
 function addCourseInput() {
   const courseRow = document.createElement("div");
   courseRow.className = "course-row";
@@ -64,6 +76,7 @@ function addCourseInput() {
   courseInputs.appendChild(courseRow);
 }
 
+// remove the course input fields
 function removeCourseInput() {
   const rows = courseInputs.getElementsByClassName("course-row");
   if (rows.length > 0) {
@@ -72,11 +85,13 @@ function removeCourseInput() {
   }
 }
 
+// addning event listeners to the add and remove course buttons
 document.getElementById("addCourse").addEventListener("click", addCourseInput);
 document
   .getElementById("removeCourse")
   .addEventListener("click", removeCourseInput);
 
+// get details from the form, calculate and display GPA
 document.getElementById("gpaForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -97,16 +112,11 @@ document.getElementById("gpaForm").addEventListener("submit", function (e) {
     }
   });
 
-  const gpa = calculateGPA(subjects, credits, grades);
-
-  if (!isNaN(gpa)) {
-    outputDiv.textContent = `YOUR GPA IS - ${gpa}`;
-  } else {
-    outputDiv.textContent = `Error: Please ensure all fields are filled correctly.`;
-  }
-  outputDiv.style.display = "block";
+  const gpa = calculateGPA(credits, grades);
+  displayGPA(gpa);
 });
 
+// Report paste feature
 const pasteButton = document.querySelector("#pasteBtn");
 const outputArea = document.querySelector("#pasteArea");
 
@@ -115,10 +125,14 @@ pasteButton.addEventListener("click", async () => {
     // Request permission to read from the clipboard
     const text = await navigator.clipboard.readText();
     outputArea.value = text;
+    scrapeGPA(text);
+    displayGPA(gpa);
   } catch (err) {
     console.error("Failed to read clipboard contents: ", err);
   }
 });
+
+function scrapeGPA(text) {}
 
 // Add the first course input fields on load
 addCourseInput();
