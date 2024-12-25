@@ -1,10 +1,42 @@
+:root {
+  --bg-color: #f4f4f9;
+  --text-color: #333;
+  --primary-color: #007bff;
+  --secondary-color: #4ecdc4;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   padding-bottom: 4rem;
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+header nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.6rem;
+  margin-right: 2rem;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 0.6rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.8rem;
+  transition: 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
 }
 
 .container {
@@ -74,13 +106,13 @@ textarea {
 }
 
 .addOrRemove button {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   font-weight: bold;
   font-size: 0.9rem;
 }
 
 .addOrRemove button:hover {
-  background-color: #0272ea;
+  background-color: #006bdd;
 }
 
 button {
@@ -90,14 +122,14 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #40e0d0;
+  background-color: var(--secondary-color);
   color: #fff;
   font-weight: bolder;
   font-size: 1.1rem;
 }
 
 button:hover {
-  background-color: #3dd2c3;
+  background-color: #40a9a2;
 }
 
 .output {
@@ -105,7 +137,7 @@ button:hover {
   padding: 1.2rem;
   font-weight: bold;
   background: #e7f3fe;
-  border: 1px solid #007bff;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   width: 600px;
   max-width: 600px;
