@@ -137,7 +137,11 @@ function scrapeAndReturnGPA(text) {
   // Split text into lines and remove the header
   const lines = text.trim().split("\n");
 
-  if (lines[0].toLowerCase().includes("subject code")) {
+  // if (lines[0].toLowerCase().includes("subject code")) {
+  //   lines.shift();
+  // }
+  // below is better approach for the headers removal -> `i` is for the case-insensitive
+  if (/subject code|subject name|credits|grade/i.test(lines[0])) {
     lines.shift();
   }
 
@@ -148,9 +152,21 @@ function scrapeAndReturnGPA(text) {
     // Split the line using tab characters
     const parts = line.split("\t").map((part) => part.trim()); // Trim each part
 
-    if (parts.length === 4) {
-      const credit = parseFloat(parts[2]); // Credits are in the 3rd column
-      const grade = parts[3]; // Grade is in the 4th column
+    if (parts.length === 4 || parts.length === 6) {
+      let credit, grade;
+
+      if (parts.length === 4) {
+        // Format: Subject Code, Subject Name, Credits, Grade
+        credit = parseFloat(parts[2]);
+        grade = parts[3];
+      } else if (parts.length === 6) {
+        // Format: Subject Code, Subject Name, Internal Marks, External Marks, Credits, Grade
+        credit = parseFloat(parts[4]);
+        grade = parts[5];
+      } else {
+        console.error(`Invalid line format: "${line}"`);
+        return NaN;
+      }
 
       // Skip grades marked as "Qualified"
       if (grade === "Qualified") continue;
