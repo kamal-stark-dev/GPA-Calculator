@@ -2,7 +2,7 @@
 
 This project is a simple web-based **GPA Calculator** that allows users to input their course information, credits, and grades to calculate their GPA. It uses HTML, CSS, and JavaScript for the frontend and logic. Additionally, users can **_directly paste their results_** into the website, and the tool will scrape the report to calculate the GPA automatically.
 
-![](./assets/demo.png)
+![image](https://github.com/user-attachments/assets/c39cc41e-c001-4f7b-86ba-7b3769e67f7f)
 
 ## Features
 
@@ -23,6 +23,8 @@ This project is a simple web-based **GPA Calculator** that allows users to input
      - **Grade**: Select the grade received for the course from the dropdown.
 3. **Paste Your Report** (Alternative): Copy your grade report and paste it into the designated input area. The application will automatically scrape the information and populate the necessary fields.
 4. **Calculate GPA**: Click the "Calculate GPA" button to view your GPA. The result will be displayed at the bottom of the form.
+
+![](./assets/demo.png)
 
 ## Grade-to-Point Mapping
 
