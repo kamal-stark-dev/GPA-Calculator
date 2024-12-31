@@ -52,7 +52,7 @@ main {
 }
 
 .container {
-  width: 75%;
+  width: 70%;
   max-width: 600px;
   padding: 1rem 2rem;
   background: #fff;
@@ -213,9 +213,13 @@ nav ul li a:hover {
 
 /* Mobile Responsiveness */
 @media (width < 426px) {
-  /* header {
-    height: max-content;
-  } */
+  input,
+  select {
+    font-size: 0.9rem;
+  }
+  .addOrRemove button {
+    font-size: 0.8rem;
+  }
   #playPauseButton {
     font-size: 1.6rem;
     padding: 1rem;

@@ -1,0 +1,44 @@
+test 1 - should give `8.19` (4 columns)
+"""
+Subject Code	Subject Name	Credits	Grade
+22CSH-282	DESIGN AND ANALYSIS OF ALGORITHMS	4.00	B+
+22CSH-286	Machine Learning	3.00	B+
+22CSH-287	Programming in Python	4.00	B+
+22CSR-289	Mini Project -1	1.00	C+
+22CST-281	Computer Organization and Architecture	3.00	B+
+22CST-283	Probability and Statistics	4.00	A
+22GPT-222	General Proficiency-4	1.00	A
+22TDP-291	SOFT SKILLS II	2.00	Qualified
+22TDT-292	Aptitude-II	4.00	Qualified
+22UCT-297	Gender Equity and Empowerment	1.00	A
+"""
+
+test 2 - should give 7.38 (headers messed)
+"""
+ect Name	Credits	Grade
+22CSH-103	Object Oriented Programming Using C++	4.00	B
+22CSP-102	Workshop Technology	1.00	B
+22CSR-107	Independent Project	1.00	C+
+22ECH-101	Digital Electronics	4.00	B+
+22ECH-103	Disruptive Technologies-2	2.00	B+
+22GPT-122	General Proficiency-2	1.00	C+
+22SMT-125	Mathematics – II	4.00	B
+22SZT-148	Biology for Engineers	3.00	B
+22TDP-151	Soft Skills -1	1.00	A
+22UCT-102	Academic Writing Skills and IPR	1.00	B+
+22UCT-103	Universal Human Values, Ethics and Life Skills-1	2.00	B+
+"""
+
+test 3 - should give 7.88 - session report (6 columns)
+"""
+Subject Code	Subject Name	Internal Marks	External Marks	Credits	Grade
+22CSH-335	Computer Networks	61.45	27.50	4.00	B+
+22CSH-340	Predictive Analytics	60.35	27.00	4.00	B+
+22CSH-345	SOFT COMPUTING	60.19	29.50	4.00	B+
+22CSI-338	Industrial Internship			2.00	Qualified
+22CSP-343	Dockers and Kubernetes Lab	56.90	39.00	1.00	A
+22CST-347	Artificial Intelligence	32.17	45.00	3.00	B
+22GPT-321	General Proficiency-5		80	1.00	B+
+22TDP-311	Soft Skills-III	41.67	32.00	2.00	Qualified
+22TDT-312	Aptitude-III	28.22	43.50	4.00	Qualified
+"""
