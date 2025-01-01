@@ -38,6 +38,7 @@ function displayGPA(gpa) {
     outputDiv.textContent = `Error: Please ensure all fields are filled correctly.`;
   }
   outputDiv.style.display = "block";
+  outputDiv.scrollIntoView({ behavior: "smooth" });
 }
 
 // add course input fields
